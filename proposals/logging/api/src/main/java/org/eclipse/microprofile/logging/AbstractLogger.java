@@ -3,12 +3,12 @@ package org.eclipse.microprofile.logging;
 import io.opentracing.Span;
 import io.opentracing.Tracer;
 import io.opentracing.log.Fields;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 import javax.enterprise.inject.spi.CDI;
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
 
 /**
  * Base class containing convenience methods for basic logging methods as well

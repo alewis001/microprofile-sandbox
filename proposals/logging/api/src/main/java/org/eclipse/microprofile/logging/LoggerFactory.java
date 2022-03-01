@@ -8,19 +8,19 @@ import javax.enterprise.inject.spi.CDI;
  */
 public class LoggerFactory {
 
-  private static final NoOpLoggerFactory NOOPFACTORY = new NoOpLoggerFactory();
+  private static final NoOpLoggerProvider NOOP_LOGGER_PROVIDER = new NoOpLoggerProvider();
 
   private static class FactoryHolder {
-    private static LoggerFactoryProvider initFactory() {
+    private static LoggerFactoryProvider initFactoryProvider() {
       try {
         return CDI.current().select(LoggerFactoryProvider.class).get();
       } catch (Throwable t) {
         // no factory
       }
-      return NOOPFACTORY;
+      return NOOP_LOGGER_PROVIDER;
     }
     
-    static final LoggerFactoryProvider FACTORY = initFactory();
+    static final LoggerFactoryProvider LOGGER_FACTORY_PROVIDER = initFactoryProvider();
   }
 
   /**
@@ -40,7 +40,7 @@ public class LoggerFactory {
    * @return The named Logger
    */
   public static Logger<LogEvent> getLogger() {
-    return getFactory().getLogger();
+    return getLoggerFactoryProvider().getLogger();
   }
 
   /**
@@ -61,7 +61,7 @@ public class LoggerFactory {
    * @return The named Logger
    */
   public static <T extends LogEvent> Logger<T> getLogger(Supplier<T> supplier) {
-    return getFactory().getLogger(supplier);
+    return getLoggerFactoryProvider().getLogger(supplier);
   }
 
   /**
@@ -77,7 +77,7 @@ public class LoggerFactory {
    * @return The named Logger
    */
   public static Logger<LogEvent> getLogger(String name) {
-    return getFactory().getLogger(name);
+    return getLoggerFactoryProvider().getLogger(name);
   }
 
   /**
@@ -99,10 +99,10 @@ public class LoggerFactory {
    * @return The named Logger
    */
   public static <T extends LogEvent> Logger<T> getLogger(String name, Supplier<T> supplier) {
-    return getFactory().getLogger(name, supplier);
+    return getLoggerFactoryProvider().getLogger(name, supplier);
   }
   
-  private static LoggerFactoryProvider getFactory() {
-    return FactoryHolder.FACTORY;
+  private static LoggerFactoryProvider getLoggerFactoryProvider() {
+    return FactoryHolder.LOGGER_FACTORY_PROVIDER;
   }
 }

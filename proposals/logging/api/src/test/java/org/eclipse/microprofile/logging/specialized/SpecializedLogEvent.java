@@ -1,6 +1,6 @@
 package org.eclipse.microprofile.logging.specialized;
 
-import javax.json.bind.annotation.JsonbProperty;
+import jakarta.json.bind.annotation.JsonbProperty;
 import org.eclipse.microprofile.logging.ExtendedData;
 import org.eclipse.microprofile.logging.LogEvent;
 

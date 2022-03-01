@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class LoggerTest {
 
   @WeldSetup
-  public WeldInitiator weld = WeldInitiator.from(MockLoggerFactory.class)
+  public WeldInitiator weld = WeldInitiator.from(MockLoggerFactoryProvider.class)
                                            .build();
   
-  private Logger log;
+  private Logger<LogEvent> log;
 
   @BeforeAll
   public static void beforeAll() {
@@ -53,7 +53,7 @@ public class LoggerTest {
    */
   @Test
   public void testDefaultNamedLogger() {
-    Logger defaultNamedLogger = LoggerFactory.getLogger();
+    Logger<LogEvent> defaultNamedLogger = LoggerFactory.getLogger();
     defaultNamedLogger.debug(e -> "A simple log message");
     
     Utils.assertLogCount(defaultNamedLogger, 1);
@@ -65,7 +65,7 @@ public class LoggerTest {
   @Test
   public void testNestedLogger() {
     final NestedClass nestedClass = new NestedClass();
-    final Logger nestedLogger = nestedClass.getLogger();
+    final Logger<LogEvent> nestedLogger = nestedClass.getLogger();
     nestedLogger.debug(e -> "A simple log message");
     
     Utils.assertLogCount(nestedLogger, 1);

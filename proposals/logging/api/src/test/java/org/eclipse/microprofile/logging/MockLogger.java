@@ -15,7 +15,6 @@ public class MockLogger<T extends LogEvent> extends AbstractLogger<T> {
   
   private final List<T> logEvents = new ArrayList<>();
   
-  
   public MockLogger(String name, Supplier<T> supplier) {
     super(name, supplier);
   }

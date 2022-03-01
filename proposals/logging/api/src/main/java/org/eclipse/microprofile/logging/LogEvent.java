@@ -1,6 +1,6 @@
 package org.eclipse.microprofile.logging;
 
-import javax.json.bind.annotation.JsonbTransient;
+import jakarta.json.bind.annotation.JsonbTransient;
 
 /**
  * A base event containing simple data for a logging event.

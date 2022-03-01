@@ -7,9 +7,10 @@ import javax.enterprise.inject.spi.Bean;
 import org.eclipse.microprofile.logging.Configuration;
 import org.eclipse.microprofile.logging.LazyEval;
 import org.eclipse.microprofile.logging.Level;
+import org.eclipse.microprofile.logging.LogEvent;
 import org.eclipse.microprofile.logging.Logger;
 import org.eclipse.microprofile.logging.LoggerFactory;
-import org.eclipse.microprofile.logging.MockLoggerFactory;
+import org.eclipse.microprofile.logging.MockLoggerFactoryProvider;
 import org.eclipse.microprofile.logging.Utils;
 import org.jboss.weld.junit.MockBean;
 import org.jboss.weld.junit5.WeldInitiator;
@@ -40,7 +41,7 @@ public class SpanLoggingTest {
   
   @WeldSetup
   public WeldInitiator weld = WeldInitiator.from(Tracer.class,
-                                                 MockLoggerFactory.class)
+                                                 MockLoggerFactoryProvider.class)
                                            .addBeans(createTracer())
                                            .build();
 
@@ -57,7 +58,7 @@ public class SpanLoggingTest {
             .build();
   }
   
-  private Logger log;
+  private Logger<LogEvent> log;
 
   @BeforeAll
   public static void beforeAll() {

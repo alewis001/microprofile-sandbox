@@ -5,7 +5,7 @@ import org.eclipse.microprofile.logging.Level;
 import org.eclipse.microprofile.logging.Logger;
 import org.eclipse.microprofile.logging.LoggerFactory;
 import org.eclipse.microprofile.logging.MockLogger;
-import org.eclipse.microprofile.logging.MockLoggerFactory;
+import org.eclipse.microprofile.logging.MockLoggerFactoryProvider;
 import org.eclipse.microprofile.logging.Utils;
 import org.jboss.weld.junit5.WeldInitiator;
 import org.jboss.weld.junit5.WeldJunit5Extension;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SpecializedLoggerTest {
   
   @WeldSetup
-  public WeldInitiator weld = WeldInitiator.from(MockLoggerFactory.class)
+  public WeldInitiator weld = WeldInitiator.from(MockLoggerFactoryProvider.class)
                                            .build();
   
   private Logger<SpecializedLogEvent> log;
